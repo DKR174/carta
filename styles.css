@@ -1,0 +1,240 @@
+:root {
+    --bg1: #0f1724;
+    /* dark slate */
+    --bg2: #1b263b;
+    /* deep blue */
+    --paper: #fffaf5;
+    --accent: #c26b8a;
+    /* rose */
+    --muted: #6b7280;
+    --glass: rgba(255, 255, 255, 0.06);
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body,
+#root {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    font-family: "Georgia", "Times New Roman", serif;
+    background: radial-gradient(1200px 600px at 10% 20%, rgba(194, 107, 138, 0.08), transparent 10%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    color: #101827;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 3rem;
+}
+
+.page {
+    width: 100%;
+    max-width: 900px
+}
+
+.letter-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 245, 0.98));
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(3, 7, 18, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    padding: 44px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.title {
+    font-family: 'Georgia', serif;
+    font-size: 2.2rem;
+    margin: 0 0 6px 0;
+    color: #2b1722;
+    letter-spacing: 0.02em;
+}
+
+.decor {
+    color: var(--accent);
+    font-size: 1rem;
+    margin-bottom: 18px
+}
+
+.letter-body {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #2b2b2b;
+    max-width: 680px;
+}
+
+.signature {
+    font-family: 'Brush Script MT', 'Segoe Script', cursive;
+    font-size: 1.35rem;
+    margin-top: 0.6rem;
+    color: var(--accent);
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px
+}
+
+.btn {
+    background: linear-gradient(180deg, var(--accent), #9f4966);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(194, 107, 138, 0.18);
+}
+
+.btn.outline {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid rgba(194, 107, 138, 0.18);
+    box-shadow: none
+}
+
+.ambient {
+    position: absolute;
+    inset: 0;
+    pointer-events: none
+}
+
+.floating-heart {
+    position: absolute;
+    right: -60px;
+    top: -120px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle at 35% 30%, rgba(194, 107, 138, 0.18), transparent 30%),
+        radial-gradient(circle at 70% 60%, rgba(255, 202, 208, 0.12), transparent 30%);
+    filter: blur(18px);
+    transform: rotate(10deg) scale(1);
+    transition: transform .6s ease-out, opacity .6s ease;
+    opacity: 0.9;
+}
+
+#hearthImg {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    opacity: 0.95;
+    cursor: pointer;
+    transition: transform .28s ease;
+}
+
+@keyframes hearth-pulse {
+    0% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(1.08)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+/* Surprise hearts */
+.heart-burst {
+    position: absolute;
+    left: 50%;
+    top: 28%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.heart {
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    border-radius: 3px 3px 0 0;
+    position: absolute;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.heart:before {
+    left: -9px;
+    top: 0
+}
+
+.heart:after {
+    top: -9px;
+    left: 0
+}
+
+/* Emoji hearts (override the default shaped hearts when using emoji) */
+.heart.emoji {
+    background: transparent !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    /* allow transforms from JS */
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.heart.emoji:before,
+.heart.emoji:after {
+    display: none
+}
+
+/* Responsive */
+@media (max-width:640px) {
+    .letter-card {
+        padding: 28px;
+        border-radius: 14px
+    }
+
+    .title {
+        font-size: 1.6rem
+    }
+}
+
+/* Print */
+@media print {
+    body {
+        background: white
+    }
+
+    .ambient,
+    .controls {
+        display: none
+    }
+
+    .letter-card {
+        box-shadow: none;
+        border: 0;
+        border-radius: 0;
+        padding: 0
+    }
+}
